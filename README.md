@@ -25,3 +25,17 @@
 {{#sec:@webSecurity.check(authentication,request)}}<li>@webSecurity.check(authentication,request){{/sec:@webSecurity.check(authentication,request)}}
 ```
 
+# Usage
+- `mvn install` compile, package and install this starter in local maven repository
+- add dependency in pom.xml
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-mustache</artifactId>
+</dependency>
+<dependency>
+    <groupId>com.pointcx</groupId>
+    <artifactId>mustache-security-spring-boot-starter</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+</dependency>
+```
