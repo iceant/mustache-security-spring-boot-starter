@@ -30,10 +30,6 @@
 - add dependency in pom.xml
 ```xml
 <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-mustache</artifactId>
-</dependency>
-<dependency>
     <groupId>com.pointcx</groupId>
     <artifactId>mustache-security-spring-boot-starter</artifactId>
     <version>0.0.1-SNAPSHOT</version>
