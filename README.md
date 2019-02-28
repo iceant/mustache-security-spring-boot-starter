@@ -19,10 +19,22 @@
 {{#sec:permitAll}}<li>permitAll</li>{{/sec:permitAll}}
 {{#sec:denyAll}}<li>denyAll</li>{{/sec:denyAll}}{{^sec:denyAll}}<li>denyAll=false</li>{{/sec:denyAll}}
 {{#sec:hasIpAddress('0:0:0:0:0:0:0:1')}}<li>hasIpAddress('0:0:0:0:0:0:0:1')</li>{{/sec:hasIpAddress('0:0:0:0:0:0:0:1')}}{{^sec:hasIpAddress('192.168.2.1')}}<li>hasIpAddress('192.168.2.1')=false</li>{{/sec:hasIpAddress('192.168.2.1')}}
-{{#sec:isMember(3)}}<li>isMember(3){{/sec:isMember(3)}}
-{{^sec:isMember(4)}}<li>isMember(4)=false{{/sec:isMember(4)}}
+
+{{{sec:csrfInput}}}
+{{{sec:csrfMetaTags}}}
+
 
 {{#sec:@webSecurity.check(authentication,request)}}<li>@webSecurity.check(authentication,request){{/sec:@webSecurity.check(authentication,request)}}
+```
+
+- WebSecurity Bean
+```java
+@Component
+public class WebSecurity {
+    public boolean check(Authentication authentication, HttpServletRequest request) {
+        return true;
+    }
+}
 ```
 
 # Usage

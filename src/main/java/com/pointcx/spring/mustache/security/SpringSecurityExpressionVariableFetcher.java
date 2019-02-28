@@ -22,6 +22,10 @@ public class SpringSecurityExpressionVariableFetcher implements com.samskivert.m
                 return authentication.getPrincipal();
             }else if(express.equalsIgnoreCase("authentication")){
                 return authentication;
+            }else if(express.equalsIgnoreCase("csrfInput")){
+                return SecurityUtil.getCsrfInput();
+            }else if(express.equalsIgnoreCase("csrfMetaTags")){
+                return SecurityUtil.getCsrfMetaTag();
             }
             return SecurityUtil.MvcAuthUtils.authorizeUsingAccessExpressionMvc(applicationContext, express, authentication);
         }

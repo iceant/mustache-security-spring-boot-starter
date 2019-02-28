@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.WebInvocationPrivilegeEvaluator;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -78,6 +79,11 @@ public class SecurityUtil {
         return null;
     }
 
+    public static CsrfToken getCsrfToken(){
+        CsrfToken csrfToken = (CsrfToken) getCurrentHttpRequest().getAttribute("_csrf");
+        return csrfToken;
+    }
+
     public static HttpServletResponse getCurrentHttpResponse(){
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         if (requestAttributes instanceof ServletRequestAttributes) {
@@ -91,6 +97,29 @@ public class SecurityUtil {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         if(securityContext==null)return null;
         return securityContext.getAuthentication();
+    }
+
+    static final String CSRF_INPUT_PATTERN = "<input type=\"hidden\" name=\"%s\" value=\"%s\">";
+    public static String getCsrfInput() {
+        CsrfToken token = getCsrfToken();
+        if(token==null){
+            return "<input type=\"hidden\" name=\"_csrf\" value=\"\">";
+        }
+        return String.format(CSRF_INPUT_PATTERN, token.getParameterName(), token.getToken());
+    }
+
+    static final String CSRF_META_TAG_PATTERN = "<meta name=\"%s\" content=\"%s\"/><meta name=\"_csrf_header\" content=\"%s\"/>";
+    public static String getCsrfMetaTag(){
+        CsrfToken token = getCsrfToken();
+        String csrfParameterName = "";
+        String csrfHeaderName="";
+        String csrfToken = "";
+        if(token!=null){
+            csrfParameterName = token.getParameterName();
+            csrfHeaderName = token.getHeaderName();
+            csrfToken = token.getToken();
+        }
+        return String.format(CSRF_META_TAG_PATTERN, csrfParameterName, csrfToken, csrfHeaderName);
     }
 
     private static class ServletFilterChainHolder {
