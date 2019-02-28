@@ -47,4 +47,10 @@ public class MustacheSecurityAutoConfiguration {
     public MustacheCompilerBeanPostProcessor mustacheCompilerBeanPostProcessor(){
         return new MustacheCompilerBeanPostProcessor();
     }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public DomainObjectResolver domainObjectResolver(Collector collector){
+        return new DefaultDomainObjectResolver(collector);
+    }
 }

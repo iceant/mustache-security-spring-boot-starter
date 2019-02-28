@@ -20,6 +20,10 @@
 {{#sec:denyAll}}<li>denyAll</li>{{/sec:denyAll}}{{^sec:denyAll}}<li>denyAll=false</li>{{/sec:denyAll}}
 {{#sec:hasIpAddress('0:0:0:0:0:0:0:1')}}<li>hasIpAddress('0:0:0:0:0:0:0:1')</li>{{/sec:hasIpAddress('0:0:0:0:0:0:0:1')}}{{^sec:hasIpAddress('192.168.2.1')}}<li>hasIpAddress('192.168.2.1')=false</li>{{/sec:hasIpAddress('192.168.2.1')}}
 
+{{#sec:hasPermission(user, 'read')}}READ PERMISSION ASSIGNED TO {{user.name}}{{/sec:hasPermission(user, 'read)'}}
+{{#sec:hasPermission(1, 'com.xxx.Menu', 'read')}}Current user has 'read' permission for 'com.xxx.Menu' on id '1' {{/sec:sec:hasPermission(1, 'com.xxx.Menu', 'read')}}
+
+
 {{{sec:csrfInput}}}
 {{{sec:csrfMetaTags}}}
 
@@ -36,6 +40,12 @@ public class WebSecurity {
     }
 }
 ```
+
+- `hasPermission(targetDomainObject, permission)`
+    - `targetDomainObject` use `DomainObjectResolver` to resolve the value
+    - `DefaultDomainObjectResolver` is the default implementation, it will check the 'request/session/servlet context/passed in evaluate data' in order to resolve the value
+        - for example, if the developer use `{{sec:hasPermission(user, 'read')}}` to check the permission, default resolver will try to get object named 'user' in request.attribute, session.attribute, servletContext.attribute and `context` used in Mustache.compiler().execute(template, **context**);  
+
 
 # Usage
 - `mvn install` compile, package and install this starter in local maven repository

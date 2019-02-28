@@ -27,7 +27,7 @@ public class SpringSecurityExpressionVariableFetcher implements com.samskivert.m
             }else if(express.equalsIgnoreCase("csrfMetaTags")){
                 return SecurityUtil.getCsrfMetaTag();
             }
-            return SecurityUtil.MvcAuthUtils.authorizeUsingAccessExpressionMvc(applicationContext, express, authentication);
+            return SecurityUtil.MustacheAuthUtil.authorizeUsingAccessExpression(applicationContext, express, authentication, ctx);
         }
         return null;
     }
