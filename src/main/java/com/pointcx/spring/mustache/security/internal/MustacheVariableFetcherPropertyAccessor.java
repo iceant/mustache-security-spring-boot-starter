@@ -1,9 +1,12 @@
-package com.pointcx.spring.mustache.security;
+package com.pointcx.spring.mustache.security.internal;
 
+import com.pointcx.spring.mustache.security.DomainObjectResolver;
 import org.springframework.context.ApplicationContext;
 import org.springframework.expression.AccessException;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.TypedValue;
+
+import static com.samskivert.mustache.Template.NO_FETCHER_FOUND;
 
 public class MustacheVariableFetcherPropertyAccessor implements org.springframework.expression.PropertyAccessor {
 
@@ -23,8 +26,11 @@ public class MustacheVariableFetcherPropertyAccessor implements org.springframew
     @Override
     public boolean canRead(EvaluationContext context, Object target, String name) throws AccessException {
         DomainObjectResolver domainObjectResolver = applicationContext.getBean(DomainObjectResolver.class);
-        Object value = domainObjectResolver.resolve(applicationContext, mustacheContext, name);
-        return value!=null;
+        try {
+            Object value = domainObjectResolver.resolve(applicationContext, mustacheContext, name);
+            return value != NO_FETCHER_FOUND;
+        }catch (Exception err){}
+        return false;
     }
 
     @Override

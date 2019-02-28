@@ -1,4 +1,4 @@
-package com.pointcx.spring.mustache.security;
+package com.pointcx.spring.mustache.security.utils;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

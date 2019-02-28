@@ -1,5 +1,6 @@
-package com.pointcx.spring.mustache.security;
+package com.pointcx.spring.mustache.security.internal;
 
+import com.pointcx.spring.mustache.security.DomainObjectResolver;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.GenericTypeResolver;
 import org.springframework.expression.EvaluationContext;

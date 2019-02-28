@@ -1,4 +1,4 @@
-package com.pointcx.spring.mustache.security;
+package com.pointcx.spring.mustache.security.internal;
 
 import com.samskivert.mustache.Mustache;
 import com.samskivert.mustache.Mustache.Collector;

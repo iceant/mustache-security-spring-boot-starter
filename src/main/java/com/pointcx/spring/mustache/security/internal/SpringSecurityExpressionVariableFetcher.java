@@ -1,7 +1,10 @@
-package com.pointcx.spring.mustache.security;
+package com.pointcx.spring.mustache.security.internal;
 
+import com.pointcx.spring.mustache.security.MustacheSecurityProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.core.Authentication;
+
+import static com.samskivert.mustache.Template.NO_FETCHER_FOUND;
 
 public class SpringSecurityExpressionVariableFetcher implements com.samskivert.mustache.Mustache.VariableFetcher {
     private final ApplicationContext applicationContext;
@@ -29,6 +32,6 @@ public class SpringSecurityExpressionVariableFetcher implements com.samskivert.m
             }
             return SecurityUtil.MustacheAuthUtil.authorizeUsingAccessExpression(applicationContext, express, authentication, ctx);
         }
-        return null;
+        return NO_FETCHER_FOUND;
     }
 }

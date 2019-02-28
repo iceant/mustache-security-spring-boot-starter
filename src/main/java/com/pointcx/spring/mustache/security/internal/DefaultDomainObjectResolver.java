@@ -1,11 +1,14 @@
-package com.pointcx.spring.mustache.security;
+package com.pointcx.spring.mustache.security.internal;
 
+import com.pointcx.spring.mustache.security.DomainObjectResolver;
 import com.samskivert.mustache.Mustache.Collector;
 import com.samskivert.mustache.Mustache.VariableFetcher;
 import org.springframework.context.ApplicationContext;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.NoSuchElementException;
+
+import static com.samskivert.mustache.Template.NO_FETCHER_FOUND;
 
 public class DefaultDomainObjectResolver implements DomainObjectResolver {
 
@@ -39,7 +42,7 @@ public class DefaultDomainObjectResolver implements DomainObjectResolver {
                } catch (Exception e) {}
            }
        }
-       if(object==null) throw new NoSuchElementException(express);
+       if(object==null || object==NO_FETCHER_FOUND) throw new NoSuchElementException(express);
        return object;
     }
 }

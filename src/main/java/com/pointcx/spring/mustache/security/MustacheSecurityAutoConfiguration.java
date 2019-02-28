@@ -1,5 +1,8 @@
 package com.pointcx.spring.mustache.security;
 
+import com.pointcx.spring.mustache.security.internal.DefaultDomainObjectResolver;
+import com.pointcx.spring.mustache.security.internal.MustacheCompilerBeanPostProcessor;
+import com.pointcx.spring.mustache.security.internal.SpringSecurityExpressionCollector;
 import com.samskivert.mustache.Mustache;
 import com.samskivert.mustache.Mustache.Collector;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
