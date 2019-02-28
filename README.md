@@ -23,6 +23,9 @@
 {{#sec:hasPermission(user, 'read')}}READ PERMISSION ASSIGNED TO {{user.name}}{{/sec:hasPermission(user, 'read)'}}
 {{#sec:hasPermission(1, 'com.xxx.Menu', 'read')}}Current user has 'read' permission for 'com.xxx.Menu' on id '1' {{/sec:sec:hasPermission(1, 'com.xxx.Menu', 'read')}}
 
+{{#sec:hasPermission(foo, 'write') or hasPermission(foo, 'read')}}
+READ OR WRITE PERMISSION ASSIGNED TO '{{#sec:principal}}{{username}}{{/sec:principal}}'
+{{/sec:hasPermission(foo, 'write') or hasPermission(foo, 'read')}}
 
 {{{sec:csrfInput}}}
 {{{sec:csrfMetaTags}}}
@@ -46,6 +49,7 @@ public class WebSecurity {
     - `DefaultDomainObjectResolver` is the default implementation, it will check the 'request/session/servlet context/passed in evaluate data' in order to resolve the value
         - for example, if the developer use `{{sec:hasPermission(user, 'read')}}` to check the permission, default resolver will try to get object named 'user' in request.attribute, session.attribute, servletContext.attribute and `context` used in Mustache.compiler().execute(template, **context**);  
 
+- Support `hasPermission(...) or hasPermission(...)`, `hasPermission(...) and hasPermission(...)`
 
 # Usage
 - `mvn install` compile, package and install this starter in local maven repository
