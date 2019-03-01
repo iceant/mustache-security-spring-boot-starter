@@ -32,6 +32,13 @@ READ OR WRITE PERMISSION ASSIGNED TO '{{#sec:principal}}{{username}}{{/sec:princ
 
 
 {{#sec:@webSecurity.check(authentication,request)}}<li>@webSecurity.check(authentication,request){{/sec:@webSecurity.check(authentication,request)}}
+
+{{#users}}
+  {{#sec:hasPermission(this, 'read')}}
+    {{this}} // this is user in the users collection
+  {{/sec:hasPermission(this, 'read')}}
+{{/users}}
+
 ```
 
 - WebSecurity Bean
